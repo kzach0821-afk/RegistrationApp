@@ -1,0 +1,5 @@
+Problems:
+Problems and optimizations
+The main issue was ensuring that the backend does not start before PostgreSQL is ready. I solved this by adding a PostgreSQL healthcheck using pg_isready and making the backend depend on db with condition: service_healthy.
+The frontend and admin apps were optimized with multi-stage Docker builds. The first stage builds the React/Vite app with Node.js, while the final runtime stage uses Nginx and contains only the static production files. The backend image was also optimized by installing only production dependencies with npm ci --omit=dev and running the container as the non-root node user.
+PostgreSQL data ios stored in named Docker volume so that data survives docker compose down while docker compose down -v correctly removes the volume and allows the database to be initialized again from init.sql

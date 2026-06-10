@@ -1,0 +1,13 @@
+node_modules
+**/node_modules
+.env
+.git
+.gitignore
+npm-debug.log
+.DS_Store
+dist
+build
+*.zip
+data
+pgdata
+postgres-data
